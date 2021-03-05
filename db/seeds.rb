@@ -121,4 +121,9 @@ puts 'creating guests with past and future bookings'
                                    status: 0)
                    end
   end
+
+  puts 'creating guests with no bookings'
+  2.times do
+    Guest.create(name: Faker::Name.name)
+  end
 end
