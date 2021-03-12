@@ -33,11 +33,22 @@ module Support
         accommodation = random_accommodation
         random_check_in = rand(1..5).months.from_now
         random_check_out = random_check_in + rand(2..10).days
+        total_guests = rand(1..4)
+        total_price = calculate_total_price(total_guests, accommodation, random_check_in, random_check_out)
 
         Booking.create!(guest_id: guest.id,
                         accommodation_id: accommodation.id,
-                        check_in: random_check_in, check_out: random_check_out,
-                        total_guests: rand(1..4), status: rand(0..2))
+                        check_in: random_check_in,
+                        check_out: random_check_out,
+                        total_guests: total_guests,
+                        status: rand(0..2)
+                       ).tap do |booking|
+                          Payment.create!(
+                            booking_id: booking.id,
+                            amount: total_price,
+                            status: rand(0..1)
+                          )
+                        end
       end
 
       private

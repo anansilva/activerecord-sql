@@ -4,8 +4,8 @@ include ::Support::Seeds::Bookings
 puts 'pruning all data'
 Payment.destroy_all
 Rating.destroy_all
-Accommodation.destroy_all
 Booking.destroy_all
+Accommodation.destroy_all
 Host.destroy_all
 Guest.destroy_all
 
@@ -42,9 +42,9 @@ puts 'creating guests with past and future bookings, payments and ratings'
     create_past_booking!(guest)
     create_future_booking!(guest)
   end
+end
 
-  puts 'creating guests with no bookings'
-  2.times do
-    Guest.create!(name: Faker::Name.name)
-  end
+puts 'creating guests with no bookings'
+2.times do
+  Guest.create!(name: Faker::Name.name)
 end
